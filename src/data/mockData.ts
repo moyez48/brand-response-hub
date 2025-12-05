@@ -138,7 +138,7 @@ export const mockEscalations: EscalationAlert[] = [
 ];
 
 export const mockAnalytics: AnalyticsData = {
-  responseRate: 67,
+  responseRate: 92,
   averageResponseTime: 42,
   sentimentBreakdown: {
     positive: 45,
