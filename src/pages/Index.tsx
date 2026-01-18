@@ -18,6 +18,7 @@ const Index = () => {
   const [comments, setComments] = useState<SocialComment[]>(mockComments);
   const [escalations, setEscalations] = useState<EscalationAlert[]>(mockEscalations);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   // Filters
   const [selectedPlatform, setSelectedPlatform] = useState<Platform | 'all'>('all');
@@ -129,6 +130,8 @@ const Index = () => {
         onViewChange={setActiveView}
         pendingCount={commentCounts.pending}
         escalationCount={pendingEscalations}
+        isCollapsed={isSidebarCollapsed}
+        onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
       />
 
       <main className="flex-1 flex flex-col overflow-hidden">
