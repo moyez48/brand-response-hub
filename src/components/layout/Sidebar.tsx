@@ -8,8 +8,7 @@ import {
   Zap,
   Users,
   FileText,
-  PanelLeftClose,
-  PanelLeft
+  Menu
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -43,18 +42,33 @@ const Sidebar = ({ activeView, onViewChange, pendingCount, escalationCount, isCo
         )}
       >
         <div className="p-3 border-b border-sidebar-border">
-          <div className="flex items-center justify-between">
-            <div className={cn("flex items-center gap-3", isCollapsed && "justify-center w-full")}>
-              <div className="h-9 w-9 rounded-lg bg-sidebar-primary flex items-center justify-center flex-shrink-0">
-                <Zap className="h-5 w-5 text-sidebar-primary-foreground" />
-              </div>
-              {!isCollapsed && (
+          <div className="flex items-center gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={onToggleCollapse}
+                  className="h-9 w-9 flex-shrink-0 text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/50"
+                >
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="right">
+                {isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              </TooltipContent>
+            </Tooltip>
+            {!isCollapsed && (
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-lg bg-sidebar-primary flex items-center justify-center flex-shrink-0">
+                  <Zap className="h-5 w-5 text-sidebar-primary-foreground" />
+                </div>
                 <div>
                   <h1 className="font-semibold text-sidebar-foreground">SocialOps</h1>
                   <p className="text-xs text-sidebar-foreground/60">Response Hub</p>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -120,7 +134,7 @@ const Sidebar = ({ activeView, onViewChange, pendingCount, escalationCount, isCo
           })}
         </nav>
 
-        <div className="p-3 border-t border-sidebar-border space-y-1">
+        <div className="p-3 border-t border-sidebar-border">
           {isCollapsed ? (
             <Tooltip>
               <TooltipTrigger asChild>
@@ -152,32 +166,6 @@ const Sidebar = ({ activeView, onViewChange, pendingCount, escalationCount, isCo
               <span>Settings</span>
             </button>
           )}
-
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={onToggleCollapse}
-                className={cn(
-                  "w-full flex items-center gap-3 px-3 py-2.5 text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/50",
-                  isCollapsed && "justify-center px-2"
-                )}
-              >
-                {isCollapsed ? (
-                  <PanelLeft className="h-4 w-4" />
-                ) : (
-                  <>
-                    <PanelLeftClose className="h-4 w-4" />
-                    <span className="text-sm font-medium">Collapse</span>
-                  </>
-                )}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="right">
-              {isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-            </TooltipContent>
-          </Tooltip>
         </div>
       </aside>
     </TooltipProvider>
